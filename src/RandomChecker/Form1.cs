@@ -1,195 +1,137 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RandomChecker
 {
     public partial class Form1 : Form
     {
-        // Array size
-        const int ACount = 1000;
-
-        // Shown number of arrays
-        const int NCount = 15;
-
-        // Sequence limit
-        const int Lim = 100;
-
+        private const int ACount = 1000; // Array size
+        private const int NCount = 15; // Shown number of arrays
+        private const int Lim = 100; // Sequence limit
         // Machine-randomized numbers
-        int[] SDRand;
-        int[] DDRand;
-        int[] TDRand;
-
+        private int[] sdRand, ddRand, tdRand;
         // Numbers from textfile
-        int[] SDFile;
-        int[] DDFile;
-        int[] TDFile;
+        private int[] sdFile, ddFile, tdFile;
 
         // Get all numbers from textfile to int array
-        static int[] ParseIntFile(string FName)
+        private static int[] ParseIntFile(string fName)
         {
-            string FText = File.ReadAllText(FName);
-
-            string[] IStr = FText.Split(new char[] { '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-            int[] Result = new int[IStr.Length];
-
-            for (int I = 0; I < IStr.Length; ++I)
-                Result[I] = int.Parse(IStr[I]);
-
-            return Result;
+            string fText = File.ReadAllText(fName);
+            string[] str = fText.Split(new[] {'\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            int[] result = new int[str.Length];
+            for (int i = 0; i<str.Length; i++)
+                result[i] = int.Parse(str[i]);
+            return result;
         }
-
         // Get evaluation of randomized sequence
-        public double RandomCheck(ref int[] Sequence)
+        private double RandomCheck(ref int[] sequence)
         {
             // If sequence is too big
-            if (Sequence.Count() > Lim)
+            if (sequence.Length>Lim)
             {
-                double Step = (double)Sequence.Count() / (double)Lim;
-
-                int[] Seq = new int[Lim];
-                for (int I = 0; I < Lim; ++I)
-                    Seq[I] = Sequence[(int)(Step * I)];
-
-                return RandomCheck(ref Seq);
+                double step = (double)sequence.Length/Lim;
+                int[] seq = new int[Lim];
+                for (int i = 0; i<Lim; i++)
+                    seq[i] = sequence[(int)(step*i)];
+                return RandomCheck(ref seq);
             }
-
             // Calculating pyramid size
-            int Count = 1;
-            for (int I = Sequence.Count() - 1; I > 1; --I)
-                Count += I;
-
+            int count = 1;
+            for (int i = sequence.Length-1; i>1; i--)
+                count += i;
             // Pyramid of subsequent substractions
-
-            int[] Pyramid = new int[Count];
-
-            for (int I = 1; I < Sequence.Count(); ++I)
-                Pyramid[I - 1] = Sequence[I] - Sequence[I - 1];
-
-            int J = 0;
-            for (int I = Sequence.Count() - 1; I > 0; --I)
+            int[] pyramid = new int[count];
+            for (int i = 1; i<sequence.Length; i++)
+                pyramid[i-1] = sequence[i]-sequence[i-1];
+            int j = 0;
+            for (int i = sequence.Length-1; i>0; i--)
             {
-                for (int K = 1; K < I; ++K)
-                {
-                    Pyramid[J + I + K - 1] = Pyramid[J + K] - Pyramid[J + K - 1];
-                }
-
-                J += I;
+                for (int k = 1; k<i; k++)
+                    pyramid[j+i+k-1] = pyramid[j+k] - pyramid[j+k-1];
+                j += i;
             }
-
             // Get all distinct numbers (bar 0) from pyramid
-            int[] Diff = Pyramid.Distinct().Where(X => X != 0).ToArray();
-
-            return (double)(Diff.Count()) / (double)(Pyramid.Count());
+            int[] diff = pyramid.Distinct().Where(x => x!=0).ToArray();
+            return diff.Length/(double)pyramid.Length;
         }
-
         // Evaluation of user input
         private void CalculateGrid()
         {
             // We can evaluate sequence of three and more numbers
-            int RCount = dataGridView2.RowCount - 1;
-            if (RCount < 3)
+            int rCount = dataGridView2.RowCount-1;
+            if (rCount<3)
             {
                 label10.Text = "More numbers!";
                 return;
             }
-
             // Convert user input to number array
-            int[] Nums = new int[RCount];
-            for (int I = 0; I < RCount; ++I)
+            int[] nums = new int[rCount];
+            for (int i = 0; i<rCount; i++)
             {
                 try
                 {
-                    Nums[I] = Convert.ToInt32(dataGridView2[0, I].Value);
+                    nums[i] = Convert.ToInt32(dataGridView2[0, i].Value);
                 }
                 catch (FormatException)
                 {
-                    label10.Text = "Error: row " + (I + 1).ToString() + "!";
+                    label10.Text = "Error: row "+(i+1)+"!";
                     return;
                 }
             }
-
             // Array evaluation
-            double Res = RandomCheck(ref Nums);
-            label10.Text = "PRB = " + Res.ToString("0.0000%");
+            double res = RandomCheck(ref nums);
+            label10.Text = "PRB = "+res.ToString("0.0000%");
         }
 
         public Form1()
         {
             InitializeComponent();
         }
-
         // Evaluation of machine-randomized and textfile numbers
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Random Rand = new Random();
-
+            Random rand = new Random();
             // Generating machine-randomized numbers
-
-            SDRand = new int[ACount];
-            DDRand = new int[ACount];
-            TDRand = new int[ACount];
-
-            for (int I = 0; I < ACount; ++I)
+            sdRand = new int[ACount];
+            ddRand = new int[ACount];
+            tdRand = new int[ACount];
+            for (int i = 0; i<ACount; i++)
             {
-                SDRand[I] = Rand.Next(0, 10);
-                DDRand[I] = Rand.Next(0, 100);
-                TDRand[I] = Rand.Next(0, 1000);
+                sdRand[i] = rand.Next(0, 10);
+                ddRand[i] = rand.Next(0, 100);
+                tdRand[i] = rand.Next(0, 1000);
             }
-
             // Loading numbers from textfile
-
-            SDFile = ParseIntFile("single_digits.txt");
-            DDFile = ParseIntFile("double_digits.txt");
-            TDFile = ParseIntFile("triple_digits.txt");
-
-            for (int I = 0; I < NCount; ++I)
+            sdFile = ParseIntFile("single_digits.txt");
+            ddFile = ParseIntFile("double_digits.txt");
+            tdFile = ParseIntFile("triple_digits.txt");
+            for (int i = 0; i<NCount; i++)
             {
-                dataGridView1.Rows.Add(SDRand[I], DDRand[I], TDRand[I]);
-                dataGridView3.Rows.Add(SDFile[I], DDFile[I], TDFile[I]);
+                dataGridView1.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
+                dataGridView3.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
             }
-
             // Evaluating machine-randomized and textfile numbers
-
-            double Res = RandomCheck(ref SDRand);
-            label4.Text = "PRB = " + Res.ToString("0.0000%");
-
-            Res = RandomCheck(ref DDRand);
-            label5.Text = "PRB = " + Res.ToString("0.0000%");
-
-            Res = RandomCheck(ref TDRand);
-            label6.Text = "PRB = " + Res.ToString("0.0000%");
-
-            Res = RandomCheck(ref SDFile);
-            label7.Text = "PRB = " + Res.ToString("0.0000%");
-
-            Res = RandomCheck(ref DDFile);
-            label8.Text = "PRB = " + Res.ToString("0.0000%");
-
-            Res = RandomCheck(ref TDFile);
-            label9.Text = "PRB = " + Res.ToString("0.0000%");
-
+            double res = RandomCheck(ref sdRand);
+            label4.Text = "PRB = "+res.ToString("0.0000%");
+            res = RandomCheck(ref ddRand);
+            label5.Text = "PRB = "+res.ToString("0.0000%");
+            res = RandomCheck(ref tdRand);
+            label6.Text = "PRB = "+res.ToString("0.0000%");
+            res = RandomCheck(ref sdFile);
+            label7.Text = "PRB = "+res.ToString("0.0000%");
+            res = RandomCheck(ref ddFile);
+            label8.Text = "PRB = "+res.ToString("0.0000%");
+            res = RandomCheck(ref tdFile);
+            label9.Text = "PRB = "+res.ToString("0.0000%");
             CalculateGrid();
         }
-
         // On cell edit
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            CalculateGrid();
-        }
-
+        { CalculateGrid(); }
         // On row deletion
         private void dataGridView2_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            CalculateGrid();
-        }
+        { CalculateGrid(); }
     }
 }
