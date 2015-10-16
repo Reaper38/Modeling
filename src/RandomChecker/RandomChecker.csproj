@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApproximateEntropyTest.cs" />
+    <Compile Include="Util\Cephes.cs" />
     <Compile Include="IRandomSequenceTest.cs" />
     <Compile Include="MainDialog.cs">
       <SubType>Form</SubType>
@@ -54,6 +56,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PyramidTest.cs" />
+    <Compile Include="Util\IntUtil.cs" />
     <EmbeddedResource Include="MainDialog.resx">
       <DependentUpon>MainDialog.cs</DependentUpon>
     </EmbeddedResource>
