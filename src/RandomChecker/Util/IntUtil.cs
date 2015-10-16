@@ -8,7 +8,7 @@ namespace RandomChecker.Util
         {
             var outerIndex = index/sbCount;
             var bitIndex = index%sbCount;
-            return (list[outerIndex] & (1<<bitIndex-1)) != 0;
+            return (list[outerIndex] & 1<<bitIndex)!=0;
         }
     }
 }
