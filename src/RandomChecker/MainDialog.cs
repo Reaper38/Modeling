@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace RandomChecker
@@ -11,20 +9,11 @@ namespace RandomChecker
         private const int NCount = 15; // Shown number of arrays
         private const int Lim = 100; // Sequence limit
         // Machine-randomized numbers
-        private int[] sdRand, ddRand, tdRand;
+        private RandomSequence sdRand, ddRand, tdRand;
         // Numbers from textfile
-        private int[] sdFile, ddFile, tdFile;
+        private RandomSequence sdFile, ddFile, tdFile;
+        private RandomSequence userSeq = RandomSequence.CreateEmpty(2);
         private readonly IRandomSequenceTest rndTest = new ApproximateEntropyTest();
-        
-        private static int[] LoadData(string filePath)
-        {
-            string text = File.ReadAllText(filePath);
-            string[] splitText = text.Split(new[] {'\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-            int[] result = new int[splitText.Length];
-            for (int i = 0; i<splitText.Length; i++)
-                result[i] = int.Parse(splitText[i]);
-            return result;
-        }
         
         private void CalculateGrid()
         {
@@ -36,12 +25,12 @@ namespace RandomChecker
                 return;
             }
             // Convert user input to number array
-            int[] nums = new int[rowCount];
+            userSeq.SetLength(rowCount);
             for (int i = 0; i<rowCount; i++)
             {
                 try
                 {
-                    nums[i] = Convert.ToInt32(dgvUserSeq[0, i].Value);
+                    userSeq[i] = Convert.ToInt32(dgvUserSeq[0, i].Value);
                 }
                 catch (FormatException)
                 {
@@ -49,7 +38,7 @@ namespace RandomChecker
                     return;
                 }
             }
-            PerformTest(lUserSeq, nums, 1);
+            PerformTest(lUserSeq, userSeq);
         }
 
         public MainDialog()
@@ -60,35 +49,29 @@ namespace RandomChecker
         private void MainDialog_Shown(object sender, EventArgs e)
         {
             Random rand = new Random();
-            sdRand = new int[ACount];
-            ddRand = new int[ACount];
-            tdRand = new int[ACount];
-            for (int i = 0; i<ACount; i++)
-            {
-                sdRand[i] = rand.Next(0, 10);
-                ddRand[i] = rand.Next(0, 100);
-                tdRand[i] = rand.Next(0, 1000);
-            }
-            sdFile = LoadData("single_digits.txt");
-            ddFile = LoadData("double_digits.txt");
-            tdFile = LoadData("triple_digits.txt");
+            sdRand = RandomSequence.Generate(ACount, 1, sb => rand.Next(0, 2));
+            ddRand = RandomSequence.Generate(ACount, 2, sb => rand.Next(0, 4));
+            tdRand = RandomSequence.Generate(ACount, 3, sb => rand.Next(0, 8));
+            sdFile = RandomSequence.Load("single_digits.txt", 1);
+            ddFile = RandomSequence.Load("double_digits.txt", 2);
+            tdFile = RandomSequence.Load("triple_digits.txt", 3);
             for (int i = 0; i<NCount; i++)
             {
                 dgvAlgSeq.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
                 dgvTabSeq.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
             }
-            PerformTest(lAlgSeq1, sdRand, 1);
-            PerformTest(lAlgSeq2, ddRand, 2);
-            PerformTest(lAlgSeq3, tdRand, 3);
-            PerformTest(lTabSeq1, sdFile, 1);
-            PerformTest(lTabSeq2, ddFile, 2);
-            PerformTest(lTabSeq3, tdFile, 3);
+            PerformTest(lAlgSeq1, sdRand);
+            PerformTest(lAlgSeq2, ddRand);
+            PerformTest(lAlgSeq3, tdRand);
+            PerformTest(lTabSeq1, sdFile);
+            PerformTest(lTabSeq2, ddFile);
+            PerformTest(lTabSeq3, tdFile);
             CalculateGrid();
         }
 
-        void PerformTest(Label l, IList<int> src, byte sbCount)
+        void PerformTest(Label l, RandomSequence src)
         {
-            var result = rndTest.Test(src, Lim, sbCount)[0];
+            var result = rndTest.Test(src.Data, Lim, src.SignificantBits)[0];
             string format = result<0.0001 ? "E" : "0.0000";
             l.Text = string.Format("PRB = {0}", result.ToString(format));
         }

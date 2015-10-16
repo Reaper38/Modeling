@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApproximateEntropyTest.cs" />
+    <Compile Include="RandomSequence.cs" />
     <Compile Include="Util\Cephes.cs" />
     <Compile Include="IRandomSequenceTest.cs" />
     <Compile Include="MainDialog.cs">
