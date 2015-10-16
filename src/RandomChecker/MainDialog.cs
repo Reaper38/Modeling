@@ -15,7 +15,7 @@ namespace RandomChecker
         private int[] sdRand, ddRand, tdRand;
         // Numbers from textfile
         private int[] sdFile, ddFile, tdFile;
-        private readonly RandomSequenceTest rndTest = new RandomSequenceTest();
+        private readonly IRandomSequenceTest rndTest = new PyramidTest();
 
         // Get all numbers from textfile to int array
         private static int[] ParseIntFile(string fName)
@@ -53,9 +53,7 @@ namespace RandomChecker
                     return;
                 }
             }
-            // Array evaluation
-            double res = rndTest.Test(nums, Lim);
-            label10.Text = "PRB = "+res.ToString("0.0000%");
+            PerformTest(label10, nums);
         }
 
         public MainDialog()
@@ -97,7 +95,7 @@ namespace RandomChecker
 
         void PerformTest(Label l, IList<int> src)
         {
-            double result = rndTest.Test(src, Lim);
+            var result = rndTest.Test(src, Lim)[0];
             l.Text = string.Format("PRB = {0}%", result.ToString("0.0000"));
         }
         // On cell edit

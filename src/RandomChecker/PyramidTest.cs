@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace RandomChecker
 {
-    public sealed class RandomSequenceTest
+    public sealed class PyramidTest : IRandomSequenceTest
     {
-        public double Test(IList<int> src, int maxLength)
+        public double[] Test(IList<int> src, int maxLength)
         {
             if (src.Count==0)
                 throw new ArgumentException("Source must not be empty.");
@@ -25,7 +25,8 @@ namespace RandomChecker
             }
             // Get all distinct numbers (bar 0) from pyramid
             var nzCount = pyramid.Distinct().Count(x => x!=0);
-            return nzCount/(double)pyramidLen;
+            var coef = nzCount/(double)pyramidLen;
+            return new[] {coef};
         }
     }
 }
