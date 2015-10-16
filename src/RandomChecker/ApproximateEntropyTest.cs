@@ -38,7 +38,7 @@ namespace RandomChecker
                         for (int j = 0; j < blockSize; j++)
                         {
                             k *= 2;
-                            if (IntUtil.GetBit(src, (i + j) % n) == 1)
+                            if (IntUtil.GetBit(src, (i + j) % n))
                                 k++;
                         }
                         p[k-1]++;
