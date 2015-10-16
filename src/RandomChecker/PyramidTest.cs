@@ -6,7 +6,7 @@ namespace RandomChecker
 {
     public sealed class PyramidTest : IRandomSequenceTest
     {
-        public double[] Test(IList<int> src, int maxLength)
+        public double[] Test(IList<int> src, int maxLength, byte sbCount)
         {
             if (src.Count==0)
                 throw new ArgumentException("Source must not be empty.");

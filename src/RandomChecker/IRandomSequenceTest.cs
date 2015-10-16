@@ -4,6 +4,6 @@ namespace RandomChecker
 {
     public interface IRandomSequenceTest
     {
-        double[] Test(IList<int> src, int maxLength);
+        double[] Test(IList<int> src, int maxLength, byte sbCount);
     }
 }

@@ -14,7 +14,7 @@ namespace RandomChecker
         private int[] sdRand, ddRand, tdRand;
         // Numbers from textfile
         private int[] sdFile, ddFile, tdFile;
-        private readonly IRandomSequenceTest rndTest = new PyramidTest();
+        private readonly IRandomSequenceTest rndTest = new ApproximateEntropyTest();
         
         private static int[] ParseIntFile(string fName)
         {
@@ -49,7 +49,7 @@ namespace RandomChecker
                     return;
                 }
             }
-            PerformTest(label10, nums);
+            PerformTest(label10, nums, 1);
         }
 
         public MainDialog()
@@ -77,18 +77,18 @@ namespace RandomChecker
                 dataGridView1.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
                 dataGridView3.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
             }
-            PerformTest(label4, sdRand);
-            PerformTest(label5, ddRand);
-            PerformTest(label6, tdRand);
-            PerformTest(label7, sdFile);
-            PerformTest(label8, ddFile);
-            PerformTest(label9, tdFile);
+            PerformTest(label4, sdRand, 1);
+            PerformTest(label5, ddRand, 2);
+            PerformTest(label6, tdRand, 3);
+            PerformTest(label7, sdFile, 1);
+            PerformTest(label8, ddFile, 2);
+            PerformTest(label9, tdFile, 3);
             CalculateGrid();
         }
 
-        void PerformTest(Label l, IList<int> src)
+        void PerformTest(Label l, IList<int> src, byte sbCount)
         {
-            var result = rndTest.Test(src, Lim)[0];
+            var result = rndTest.Test(src, Lim, sbCount)[0];
             string format = result<0.0001 ? "E" : "0.0000";
             l.Text = string.Format("PRB = {0}%", result.ToString(format));
         }

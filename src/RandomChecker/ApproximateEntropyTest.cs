@@ -8,18 +8,17 @@ namespace RandomChecker
     {
         // Decision Rule (at the 1% Level)
         private const double Alpha = 0.01;
-        /// block bit length
-        private const int BlockSize = 32;
 
-        public double[] Test(IList<int> src, int maxLength)
+        public double[] Test(IList<int> src, int maxLength, byte sbCount)
         {
             if (src.Count==0)
                 throw new ArgumentException("Source must not be empty.");
             var srcLen = Math.Min(src.Count, maxLength);
-            int n = srcLen*32; // string bit length
+            int n = srcLen*sbCount;
             int r = 0;
+            int initBlockSize = sbCount;
             double[] apEn = new double[2];
-            for (int blockSize = BlockSize; blockSize<=BlockSize+1; blockSize++)
+            for (int blockSize = initBlockSize; blockSize<=initBlockSize+1; blockSize++)
             {
                 if (blockSize==0)
                 {
@@ -38,7 +37,7 @@ namespace RandomChecker
                         for (int j = 0; j < blockSize; j++)
                         {
                             k *= 2;
-                            if (IntUtil.GetBit(src, (i + j) % n))
+                            if (IntUtil.GetBit(src, (i + j) % n, sbCount))
                                 k++;
                         }
                         p[k-1]++;
@@ -59,7 +58,7 @@ namespace RandomChecker
             double approximateEntropy = apEn[0]-apEn[1];
             //calculate prob
             double chiSquared = 2.0*n*(Math.Log(2) - approximateEntropy);
-            double prob = Cephes.Igamc(Math.Pow(2, BlockSize-1), chiSquared/2.0);
+            double prob = Cephes.Igamc(Math.Pow(2, initBlockSize-1), chiSquared/2.0);
             // success = prob>Alpha
             return new[] {prob};
         }
