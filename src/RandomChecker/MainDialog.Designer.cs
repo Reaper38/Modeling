@@ -28,52 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvAlgSeq = new System.Windows.Forms.DataGridView();
             this.SingleDigit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DoubleDigit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TripleDigit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvUserSeq = new System.Windows.Forms.DataGridView();
             this.UserBased = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dgvTabSeq = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.lAlgSeq1 = new System.Windows.Forms.Label();
+            this.lAlgSeq2 = new System.Windows.Forms.Label();
+            this.lAlgSeq3 = new System.Windows.Forms.Label();
+            this.lTabSeq1 = new System.Windows.Forms.Label();
+            this.lTabSeq2 = new System.Windows.Forms.Label();
+            this.lTabSeq3 = new System.Windows.Forms.Label();
+            this.lUserSeq = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlgSeq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUserSeq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabSeq)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvAlgSeq
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvAlgSeq.AllowUserToAddRows = false;
+            this.dgvAlgSeq.AllowUserToDeleteRows = false;
+            this.dgvAlgSeq.AllowUserToResizeColumns = false;
+            this.dgvAlgSeq.AllowUserToResizeRows = false;
+            this.dgvAlgSeq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAlgSeq.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvAlgSeq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAlgSeq.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SingleDigit,
             this.DoubleDigit,
             this.TripleDigit});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 32);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 80;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(470, 398);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvAlgSeq.Location = new System.Drawing.Point(12, 32);
+            this.dgvAlgSeq.Name = "dgvAlgSeq";
+            this.dgvAlgSeq.ReadOnly = true;
+            this.dgvAlgSeq.RowHeadersVisible = false;
+            this.dgvAlgSeq.RowHeadersWidth = 80;
+            this.dgvAlgSeq.RowTemplate.Height = 24;
+            this.dgvAlgSeq.Size = new System.Drawing.Size(470, 398);
+            this.dgvAlgSeq.TabIndex = 0;
             // 
             // SingleDigit
             // 
@@ -96,51 +96,51 @@
             this.TripleDigit.Name = "TripleDigit";
             this.TripleDigit.ReadOnly = true;
             // 
-            // dataGridView2
+            // dgvUserSeq
             // 
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvUserSeq.AllowUserToResizeColumns = false;
+            this.dgvUserSeq.AllowUserToResizeRows = false;
+            this.dgvUserSeq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUserSeq.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvUserSeq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUserSeq.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserBased});
-            this.dataGridView2.Location = new System.Drawing.Point(978, 32);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(124, 398);
-            this.dataGridView2.TabIndex = 1;
-            this.dataGridView2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
-            this.dataGridView2.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView2_UserDeletedRow);
+            this.dgvUserSeq.Location = new System.Drawing.Point(978, 32);
+            this.dgvUserSeq.Name = "dgvUserSeq";
+            this.dgvUserSeq.RowHeadersVisible = false;
+            this.dgvUserSeq.RowTemplate.Height = 24;
+            this.dgvUserSeq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUserSeq.Size = new System.Drawing.Size(124, 398);
+            this.dgvUserSeq.TabIndex = 1;
+            this.dgvUserSeq.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
+            this.dgvUserSeq.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView2_UserDeletedRow);
             // 
             // UserBased
             // 
             this.UserBased.HeaderText = "Any X";
             this.UserBased.Name = "UserBased";
             // 
-            // dataGridView3
+            // dgvTabSeq
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AllowUserToResizeColumns = false;
-            this.dataGridView3.AllowUserToResizeRows = false;
-            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvTabSeq.AllowUserToAddRows = false;
+            this.dgvTabSeq.AllowUserToDeleteRows = false;
+            this.dgvTabSeq.AllowUserToResizeColumns = false;
+            this.dgvTabSeq.AllowUserToResizeRows = false;
+            this.dgvTabSeq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTabSeq.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvTabSeq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTabSeq.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            this.dataGridView3.Location = new System.Drawing.Point(494, 32);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.RowHeadersWidth = 80;
-            this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(470, 398);
-            this.dataGridView3.TabIndex = 2;
+            this.dgvTabSeq.Location = new System.Drawing.Point(494, 32);
+            this.dgvTabSeq.Name = "dgvTabSeq";
+            this.dgvTabSeq.ReadOnly = true;
+            this.dgvTabSeq.RowHeadersVisible = false;
+            this.dgvTabSeq.RowHeadersWidth = 80;
+            this.dgvTabSeq.RowTemplate.Height = 24;
+            this.dgvTabSeq.Size = new System.Drawing.Size(470, 398);
+            this.dgvTabSeq.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -190,86 +190,86 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Input";
             // 
-            // label4
+            // lAlgSeq1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 438);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 17);
-            this.label4.TabIndex = 6;
+            this.lAlgSeq1.AutoSize = true;
+            this.lAlgSeq1.Location = new System.Drawing.Point(22, 438);
+            this.lAlgSeq1.Name = "lAlgSeq1";
+            this.lAlgSeq1.Size = new System.Drawing.Size(0, 17);
+            this.lAlgSeq1.TabIndex = 6;
             // 
-            // label5
+            // lAlgSeq2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(178, 438);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 17);
-            this.label5.TabIndex = 7;
+            this.lAlgSeq2.AutoSize = true;
+            this.lAlgSeq2.Location = new System.Drawing.Point(178, 438);
+            this.lAlgSeq2.Name = "lAlgSeq2";
+            this.lAlgSeq2.Size = new System.Drawing.Size(0, 17);
+            this.lAlgSeq2.TabIndex = 7;
             // 
-            // label6
+            // lAlgSeq3
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(334, 438);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 17);
-            this.label6.TabIndex = 8;
+            this.lAlgSeq3.AutoSize = true;
+            this.lAlgSeq3.Location = new System.Drawing.Point(334, 438);
+            this.lAlgSeq3.Name = "lAlgSeq3";
+            this.lAlgSeq3.Size = new System.Drawing.Size(0, 17);
+            this.lAlgSeq3.TabIndex = 8;
             // 
-            // label7
+            // lTabSeq1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(504, 438);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(0, 17);
-            this.label7.TabIndex = 9;
+            this.lTabSeq1.AutoSize = true;
+            this.lTabSeq1.Location = new System.Drawing.Point(504, 438);
+            this.lTabSeq1.Name = "lTabSeq1";
+            this.lTabSeq1.Size = new System.Drawing.Size(0, 17);
+            this.lTabSeq1.TabIndex = 9;
             // 
-            // label8
+            // lTabSeq2
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(660, 438);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 17);
-            this.label8.TabIndex = 10;
+            this.lTabSeq2.AutoSize = true;
+            this.lTabSeq2.Location = new System.Drawing.Point(660, 438);
+            this.lTabSeq2.Name = "lTabSeq2";
+            this.lTabSeq2.Size = new System.Drawing.Size(0, 17);
+            this.lTabSeq2.TabIndex = 10;
             // 
-            // label9
+            // lTabSeq3
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(816, 438);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(0, 17);
-            this.label9.TabIndex = 11;
+            this.lTabSeq3.AutoSize = true;
+            this.lTabSeq3.Location = new System.Drawing.Point(816, 438);
+            this.lTabSeq3.Name = "lTabSeq3";
+            this.lTabSeq3.Size = new System.Drawing.Size(0, 17);
+            this.lTabSeq3.TabIndex = 11;
             // 
-            // label10
+            // lUserSeq
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(988, 438);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(0, 17);
-            this.label10.TabIndex = 12;
+            this.lUserSeq.AutoSize = true;
+            this.lUserSeq.Location = new System.Drawing.Point(988, 438);
+            this.lUserSeq.Name = "lUserSeq";
+            this.lUserSeq.Size = new System.Drawing.Size(0, 17);
+            this.lUserSeq.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 463);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lUserSeq);
+            this.Controls.Add(this.lTabSeq3);
+            this.Controls.Add(this.lTabSeq2);
+            this.Controls.Add(this.lTabSeq1);
+            this.Controls.Add(this.lAlgSeq3);
+            this.Controls.Add(this.lAlgSeq2);
+            this.Controls.Add(this.lAlgSeq1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView3);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvTabSeq);
+            this.Controls.Add(this.dgvUserSeq);
+            this.Controls.Add(this.dgvAlgSeq);
             this.Name = "Form1";
             this.Text = "Random checker";
             this.Shown += new System.EventHandler(this.MainDialog_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlgSeq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUserSeq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTabSeq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,9 +277,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dgvAlgSeq;
+        private System.Windows.Forms.DataGridView dgvUserSeq;
+        private System.Windows.Forms.DataGridView dgvTabSeq;
         private System.Windows.Forms.DataGridViewTextBoxColumn SingleDigit;
         private System.Windows.Forms.DataGridViewTextBoxColumn DoubleDigit;
         private System.Windows.Forms.DataGridViewTextBoxColumn TripleDigit;
@@ -289,13 +289,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lAlgSeq1;
+        private System.Windows.Forms.Label lAlgSeq2;
+        private System.Windows.Forms.Label lAlgSeq3;
+        private System.Windows.Forms.Label lTabSeq1;
+        private System.Windows.Forms.Label lTabSeq2;
+        private System.Windows.Forms.Label lTabSeq3;
+        private System.Windows.Forms.Label lUserSeq;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserBased;
     }
 }

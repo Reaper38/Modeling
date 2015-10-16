@@ -16,40 +16,40 @@ namespace RandomChecker
         private int[] sdFile, ddFile, tdFile;
         private readonly IRandomSequenceTest rndTest = new ApproximateEntropyTest();
         
-        private static int[] ParseIntFile(string fName)
+        private static int[] LoadData(string filePath)
         {
-            string fText = File.ReadAllText(fName);
-            string[] str = fText.Split(new[] {'\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-            int[] result = new int[str.Length];
-            for (int i = 0; i<str.Length; i++)
-                result[i] = int.Parse(str[i]);
+            string text = File.ReadAllText(filePath);
+            string[] splitText = text.Split(new[] {'\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            int[] result = new int[splitText.Length];
+            for (int i = 0; i<splitText.Length; i++)
+                result[i] = int.Parse(splitText[i]);
             return result;
         }
         
         private void CalculateGrid()
         {
             // We can evaluate sequence of three and more numbers
-            int rCount = dataGridView2.RowCount-1;
-            if (rCount<3)
+            int rowCount = dgvUserSeq.RowCount-1;
+            if (rowCount<3)
             {
-                label10.Text = "More numbers!";
+                lUserSeq.Text = "More numbers!";
                 return;
             }
             // Convert user input to number array
-            int[] nums = new int[rCount];
-            for (int i = 0; i<rCount; i++)
+            int[] nums = new int[rowCount];
+            for (int i = 0; i<rowCount; i++)
             {
                 try
                 {
-                    nums[i] = Convert.ToInt32(dataGridView2[0, i].Value);
+                    nums[i] = Convert.ToInt32(dgvUserSeq[0, i].Value);
                 }
                 catch (FormatException)
                 {
-                    label10.Text = "Error: row "+(i+1)+"!";
+                    lUserSeq.Text = "Error: row "+(i+1)+"!";
                     return;
                 }
             }
-            PerformTest(label10, nums, 1);
+            PerformTest(lUserSeq, nums, 1);
         }
 
         public MainDialog()
@@ -69,20 +69,20 @@ namespace RandomChecker
                 ddRand[i] = rand.Next(0, 100);
                 tdRand[i] = rand.Next(0, 1000);
             }
-            sdFile = ParseIntFile("single_digits.txt");
-            ddFile = ParseIntFile("double_digits.txt");
-            tdFile = ParseIntFile("triple_digits.txt");
+            sdFile = LoadData("single_digits.txt");
+            ddFile = LoadData("double_digits.txt");
+            tdFile = LoadData("triple_digits.txt");
             for (int i = 0; i<NCount; i++)
             {
-                dataGridView1.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
-                dataGridView3.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
+                dgvAlgSeq.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
+                dgvTabSeq.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
             }
-            PerformTest(label4, sdRand, 1);
-            PerformTest(label5, ddRand, 2);
-            PerformTest(label6, tdRand, 3);
-            PerformTest(label7, sdFile, 1);
-            PerformTest(label8, ddFile, 2);
-            PerformTest(label9, tdFile, 3);
+            PerformTest(lAlgSeq1, sdRand, 1);
+            PerformTest(lAlgSeq2, ddRand, 2);
+            PerformTest(lAlgSeq3, tdRand, 3);
+            PerformTest(lTabSeq1, sdFile, 1);
+            PerformTest(lTabSeq2, ddFile, 2);
+            PerformTest(lTabSeq3, tdFile, 3);
             CalculateGrid();
         }
 
