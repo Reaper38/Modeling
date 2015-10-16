@@ -1,6 +1,6 @@
 ﻿namespace RandomChecker
 {
-    partial class Form1
+    partial class MainDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -266,7 +266,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Random checker";
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Shown += new System.EventHandler(this.MainDialog_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();

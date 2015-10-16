@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace RandomChecker
 {
-    public partial class Form1 : Form
+    public partial class MainDialog : Form
     {
         private const int ACount = 1000; // Array size
         private const int NCount = 15; // Shown number of arrays
@@ -14,6 +15,7 @@ namespace RandomChecker
         private int[] sdRand, ddRand, tdRand;
         // Numbers from textfile
         private int[] sdFile, ddFile, tdFile;
+        private readonly RandomSequenceTest rndTest = new RandomSequenceTest();
 
         // Get all numbers from textfile to int array
         private static int[] ParseIntFile(string fName)
@@ -26,36 +28,7 @@ namespace RandomChecker
             return result;
         }
         // Get evaluation of randomized sequence
-        private double RandomCheck(ref int[] sequence)
-        {
-            // If sequence is too big
-            if (sequence.Length>Lim)
-            {
-                double step = (double)sequence.Length/Lim;
-                int[] seq = new int[Lim];
-                for (int i = 0; i<Lim; i++)
-                    seq[i] = sequence[(int)(step*i)];
-                return RandomCheck(ref seq);
-            }
-            // Calculating pyramid size
-            int count = 1;
-            for (int i = sequence.Length-1; i>1; i--)
-                count += i;
-            // Pyramid of subsequent substractions
-            int[] pyramid = new int[count];
-            for (int i = 1; i<sequence.Length; i++)
-                pyramid[i-1] = sequence[i]-sequence[i-1];
-            int j = 0;
-            for (int i = sequence.Length-1; i>0; i--)
-            {
-                for (int k = 1; k<i; k++)
-                    pyramid[j+i+k-1] = pyramid[j+k] - pyramid[j+k-1];
-                j += i;
-            }
-            // Get all distinct numbers (bar 0) from pyramid
-            int[] diff = pyramid.Distinct().Where(x => x!=0).ToArray();
-            return diff.Length/(double)pyramid.Length;
-        }
+        
         // Evaluation of user input
         private void CalculateGrid()
         {
@@ -81,16 +54,16 @@ namespace RandomChecker
                 }
             }
             // Array evaluation
-            double res = RandomCheck(ref nums);
+            double res = rndTest.Test(nums, Lim);
             label10.Text = "PRB = "+res.ToString("0.0000%");
         }
 
-        public Form1()
+        public MainDialog()
         {
             InitializeComponent();
         }
         // Evaluation of machine-randomized and textfile numbers
-        private void Form1_Shown(object sender, EventArgs e)
+        private void MainDialog_Shown(object sender, EventArgs e)
         {
             Random rand = new Random();
             // Generating machine-randomized numbers
@@ -113,19 +86,19 @@ namespace RandomChecker
                 dataGridView3.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
             }
             // Evaluating machine-randomized and textfile numbers
-            double res = RandomCheck(ref sdRand);
-            label4.Text = "PRB = "+res.ToString("0.0000%");
-            res = RandomCheck(ref ddRand);
-            label5.Text = "PRB = "+res.ToString("0.0000%");
-            res = RandomCheck(ref tdRand);
-            label6.Text = "PRB = "+res.ToString("0.0000%");
-            res = RandomCheck(ref sdFile);
-            label7.Text = "PRB = "+res.ToString("0.0000%");
-            res = RandomCheck(ref ddFile);
-            label8.Text = "PRB = "+res.ToString("0.0000%");
-            res = RandomCheck(ref tdFile);
-            label9.Text = "PRB = "+res.ToString("0.0000%");
+            PerformTest(label4, sdRand);
+            PerformTest(label5, ddRand);
+            PerformTest(label6, tdRand);
+            PerformTest(label7, sdFile);
+            PerformTest(label8, ddFile);
+            PerformTest(label9, tdFile);
             CalculateGrid();
+        }
+
+        void PerformTest(Label l, IList<int> src)
+        {
+            double result = rndTest.Test(src, Lim);
+            l.Text = string.Format("PRB = {0}%", result.ToString("0.0000"));
         }
         // On cell edit
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
