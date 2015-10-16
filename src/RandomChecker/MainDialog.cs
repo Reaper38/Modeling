@@ -89,7 +89,8 @@ namespace RandomChecker
         void PerformTest(Label l, IList<int> src)
         {
             var result = rndTest.Test(src, Lim)[0];
-            l.Text = string.Format("PRB = {0}%", result.ToString("0.0000"));
+            string format = result<0.0001 ? "E" : "0.0000";
+            l.Text = string.Format("PRB = {0}%", result.ToString(format));
         }
 
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
