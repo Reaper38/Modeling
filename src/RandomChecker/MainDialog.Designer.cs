@@ -303,6 +303,7 @@
             this.Controls.Add(this.dgvTabSeq);
             this.Controls.Add(this.dgvUserSeq);
             this.Controls.Add(this.dgvAlgSeq);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainDialog";
             this.Text = "Random checker";
