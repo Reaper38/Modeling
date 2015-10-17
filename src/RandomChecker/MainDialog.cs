@@ -102,7 +102,7 @@ namespace RandomChecker
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int keepBits = (int)numBitLength.Value;
-            userSeq.SetLength(e.RowIndex+1);
+            userSeq.EnsureLength(e.RowIndex+1);
             VerifyBitLength(e.RowIndex, keepBits);
             CalculateGrid();
         }

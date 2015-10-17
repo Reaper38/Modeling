@@ -17,20 +17,30 @@ namespace RandomChecker
             get { return data[i]; }
             set { data[i] = value; }
         }
-
-        public void Prealloc(int length) { data.Capacity = length; }
-
+        
         public void SetLength(int length)
         {
             var currentLength = data.Count;
             if (currentLength<length)
             {
-                Prealloc(length);
+                EnsureCapacity(length);
                 for (int i = 0; i<length-currentLength; i++)
                     data.Add(0);
             }
             else if (data.Count>length)
                 data.RemoveRange(length, currentLength-length);
+        }
+
+        public void EnsureCapacity(int capacity)
+        {
+            if (data.Capacity<capacity)
+                data.Capacity = capacity;
+        }
+
+        public void EnsureLength(int length)
+        {
+            if (data.Count<length)
+                SetLength(length);
         }
 
         private RandomSequence(int length, byte sbCount)
