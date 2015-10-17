@@ -14,6 +14,7 @@ namespace RandomChecker
         private RandomSequence sdFile, ddFile, tdFile;
         private RandomSequence userSeq = RandomSequence.CreateEmpty(2);
         private readonly IRandomSequenceTest rndTest = new ApproximateEntropyTest();
+        private decimal prevBitLength;
         
         private void CalculateGrid()
         {
@@ -44,8 +45,30 @@ namespace RandomChecker
         public MainDialog()
         {
             InitializeComponent();
+            prevBitLength = numBitLength.Value;
         }
-        
+
+        private void numBitLength_ValueChanged(object sender, EventArgs e)
+        {
+            if (numBitLength.Value>=prevBitLength)
+            {
+                prevBitLength = numBitLength.Value;
+                return;
+            }
+            int keepBits = (int)numBitLength.Value;
+            int rowCount = dgvUserSeq.RowCount-1;
+            for (int i = 0; i<rowCount; i++)
+                VerifyBitLength(i, keepBits);
+        }
+
+        private void VerifyBitLength(int index, int keepBits)
+        {
+            var x = Convert.ToInt32(dgvUserSeq[0, index].Value);
+            x &= ~(~0<<keepBits);
+            dgvUserSeq[0, index].Value = x;
+            userSeq[index] = x;
+        }
+
         private void MainDialog_Shown(object sender, EventArgs e)
         {
             Random rand = new Random();
@@ -77,7 +100,12 @@ namespace RandomChecker
         }
 
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        { CalculateGrid(); }
+        {
+            int keepBits = (int)numBitLength.Value;
+            userSeq.SetLength(e.RowIndex+1);
+            VerifyBitLength(e.RowIndex, keepBits);
+            CalculateGrid();
+        }
 
         private void dataGridView2_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         { CalculateGrid(); }
