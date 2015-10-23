@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomChecker", "RandomChecker\RandomChecker.csproj", "{F4297909-A563-447B-B8ED-0BE51F6F658B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributionPlotter", "DistributionPlotter\DistributionPlotter.csproj", "{3C315494-88EC-4DF4-A5BC-67CA61246852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F4297909-A563-447B-B8ED-0BE51F6F658B}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{F4297909-A563-447B-B8ED-0BE51F6F658B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4297909-A563-447B-B8ED-0BE51F6F658B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C315494-88EC-4DF4-A5BC-67CA61246852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C315494-88EC-4DF4-A5BC-67CA61246852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C315494-88EC-4DF4-A5BC-67CA61246852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C315494-88EC-4DF4-A5BC-67CA61246852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
