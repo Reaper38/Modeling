@@ -6,7 +6,7 @@ namespace RandomChecker
     public partial class MainDialog : Form
     {
         private const int ACount = 1000; // Array size
-        private const int NCount = 15; // Shown number of arrays
+        private const int NCount = 999; // Shown number of arrays
         private const int Lim = 100; // Sequence limit
         // Machine-randomized numbers
         private RandomSequence sdRand, ddRand, tdRand;
