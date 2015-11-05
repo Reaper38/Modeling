@@ -8,9 +8,7 @@ namespace DistributionPlotter
 
     public partial class FormMain : Form
     {
-        // Число значений
-        const int Points = 5000;
-
+             
         public FormMain()
         {
             InitializeComponent();
@@ -20,63 +18,27 @@ namespace DistributionPlotter
             zedGraph.GraphPane.YAxis.Title.Text = "Y";
 
             rbtnUni.Checked = true;
-        }
-
-        // Получение набора значений X между двумя значениями
-        private double[] GetRange(double Start, double Finish)
-        {
-            double[] Output = new double[Points];
-
-            double Step = (Finish - Start) / Points;
-            double Current = Start;
-
-            for (int I = 0; I < Points; ++I)
-            {
-                Output[I] = Current;
-                Current += Step;
-            }
-
-            return Output;
-        }
-
-
+        }       
 
         // Вычисление
         private void button1_Click(object sender, EventArgs e)
         {
-            double[] X;
-            double[] Y, y;
+            // Число значений
+            int Points = (int)numPoint.Value;           
             
             GraphPane Pane = zedGraph.GraphPane;
             Pane.CurveList.Clear();
 
-            PointPairList P1, P2;
-            
+            // Равномерное распределение
             if (rbtnUni.Checked)
-            {
-                // Равномерное распределение
+            {              
                 try
                 {
-                    var d = new Distribution();
-                    double A = (double)numIn1.Value;
-                    double B = (double)numIn2.Value;
-                    if (A > B)
-                    {
-                        A += B;
-                        B = A - B;
-                        A -= B;
-                    }
-
-                    X = GetRange(2 * A - B - 2, 2 * B - A + 2);
-
-                    Y = d.UniformDistribution(X, A, B);
-                    y = d.UniformDensity(X, A, B);
-
-                    P1 = new PointPairList(X, Y);
-                    P2 = new PointPairList(X, y);
-
-                    Pane.AddCurve("Распределение", P1, Color.Red, SymbolType.None);
-                    Pane.AddCurve("Плотность", P2, Color.Blue, SymbolType.None);
+                    var A = (double)numIn1.Value;
+                    var B = (double)numIn2.Value;
+                    var p = Util.PlotUni(A, B, Points);
+                    Pane.AddCurve("Распределение", p[0], Color.Red, SymbolType.None);
+                    Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
 
                     txbxMo.Text = Convert.ToString((A + B) / 2);
                     txbxDisp.Text = Convert.ToString((A - B) * (A - B) / 12);
@@ -86,26 +48,16 @@ namespace DistributionPlotter
                     MessageBox.Show("Введены неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                // Экспоненциальное распределение
+
+            // Экспоненциальное распределение
+            if (rbtnExp.Checked)
+            {             
                 try
                 {
-                    var d = new Distribution();
-                    double L = (double) numIn1.Value;
-                    if (L <= 0)
-                        throw new Exception("Invalid lambda input");
-
-                    X = GetRange(-5.0 / L, 10.0 / L);
-
-                    Y = d.ExponentialDistribution(X, L);
-                    y = d.ExponentialDensity(X, L);
-
-                    P1 = new PointPairList(X, Y);
-                    P2 = new PointPairList(X, y);
-
-                    Pane.AddCurve("Распределение", P1, Color.Red, SymbolType.None);
-                    Pane.AddCurve("Плотность", P2, Color.Blue, SymbolType.None);
+                    var L = (double)numIn1.Value;
+                    var p = Util.PlotExp(L, Points);
+                    Pane.AddCurve("Распределение", p[0], Color.Red, SymbolType.None);
+                    Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
 
                     txbxMo.Text = Convert.ToString(1/L);
                     txbxDisp.Text = Convert.ToString(1/L/L);
