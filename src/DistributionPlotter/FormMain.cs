@@ -13,7 +13,7 @@ namespace DistributionPlotter
         {
             InitializeComponent();
 
-            zedGraph.GraphPane.Title.Text = "Графики распределения";
+            zedGraph.GraphPane.Title.Text = "Distribution Graph";
             zedGraph.GraphPane.XAxis.Title.Text = "X";
             zedGraph.GraphPane.YAxis.Title.Text = "Y";
 
@@ -28,46 +28,37 @@ namespace DistributionPlotter
             
             GraphPane Pane = zedGraph.GraphPane;
             Pane.CurveList.Clear();
-
-            // Равномерное распределение
-            if (rbtnUni.Checked)
-            {              
-                try
+            PointPairList[] p = new PointPairList[0];
+            try
+            {
+                // Равномерное распределение
+                if (rbtnUni.Checked)
                 {
                     var A = (double)numIn1.Value;
                     var B = (double)numIn2.Value;
-                    var p = Util.PlotUni(A, B, Points);
-                    Pane.AddCurve("Распределение", p[0], Color.Red, SymbolType.None);
-                    Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
+                    p = Util.PlotUni(A, B, Points);
 
                     txbxMo.Text = Convert.ToString((A + B) / 2);
                     txbxDisp.Text = Convert.ToString((A - B) * (A - B) / 12);
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("Введены неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            // Экспоненциальное распределение
-            if (rbtnExp.Checked)
-            {             
-                try
+                // Экспоненциальное распределение
+                if (rbtnExp.Checked)
                 {
                     var L = (double)numIn1.Value;
-                    var p = Util.PlotExp(L, Points);
-                    Pane.AddCurve("Распределение", p[0], Color.Red, SymbolType.None);
-                    Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
+                    p = Util.PlotExp(L, Points);
 
-                    txbxMo.Text = Convert.ToString(1/L);
-                    txbxDisp.Text = Convert.ToString(1/L/L);
+                    txbxMo.Text = Convert.ToString(1 / L);
+                    txbxDisp.Text = Convert.ToString(1 / L / L);
+
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("Введены неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }           
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong parameters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            
+            Pane.AddCurve("Distribution", p[0], Color.Red, SymbolType.None);
+            Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
             // Обновить график
             zedGraph.AxisChange();
             zedGraph.Invalidate();
