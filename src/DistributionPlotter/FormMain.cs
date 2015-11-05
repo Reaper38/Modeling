@@ -12,20 +12,20 @@ namespace DistributionPlotter
 {
     using ZedGraph;
 
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         // Число значений
         const int Points = 5000;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
-            zedGraphControl1.GraphPane.Title.Text = "Графики распределения";
-            zedGraphControl1.GraphPane.XAxis.Title.Text = "X";
-            zedGraphControl1.GraphPane.YAxis.Title.Text = "Y";
+            zedGraph.GraphPane.Title.Text = "Графики распределения";
+            zedGraph.GraphPane.XAxis.Title.Text = "X";
+            zedGraph.GraphPane.YAxis.Title.Text = "Y";
 
-            radioButton1.Checked = true;
+            rbtnUni.Checked = true;
         }
 
         // Получение набора значений X между двумя значениями
@@ -53,19 +53,19 @@ namespace DistributionPlotter
             double[] X;
             double[] Y, y;
             
-            GraphPane Pane = zedGraphControl1.GraphPane;
+            GraphPane Pane = zedGraph.GraphPane;
             Pane.CurveList.Clear();
 
             PointPairList P1, P2;
             
-            if (radioButton1.Checked)
+            if (rbtnUni.Checked)
             {
                 // Равномерное распределение
                 try
                 {
                     var d = new Distribution();
-                    double A = Convert.ToDouble(textBox1.Text);
-                    double B = Convert.ToDouble(textBox2.Text);
+                    double A = Convert.ToDouble(txbxIn1.Text);
+                    double B = Convert.ToDouble(txbxIn2.Text);
                     if (A > B)
                     {
                         A += B;
@@ -84,8 +84,8 @@ namespace DistributionPlotter
                     Pane.AddCurve("Распределение", P1, Color.Red, SymbolType.None);
                     Pane.AddCurve("Плотность", P2, Color.Blue, SymbolType.None);
 
-                    textBox3.Text = Convert.ToString((A + B) / 2);
-                    textBox4.Text = Convert.ToString((A - B) * (A - B) / 12);
+                    txbxMo.Text = Convert.ToString((A + B) / 2);
+                    txbxDisp.Text = Convert.ToString((A - B) * (A - B) / 12);
                 }
                 catch (Exception)
                 {
@@ -98,7 +98,7 @@ namespace DistributionPlotter
                 try
                 {
                     var d = new Distribution();
-                    double L = Convert.ToDouble(textBox1.Text);
+                    double L = Convert.ToDouble(txbxIn1.Text);
                     if (L <= 0)
                         throw new Exception("Invalid lambda input");
 
@@ -113,8 +113,8 @@ namespace DistributionPlotter
                     Pane.AddCurve("Распределение", P1, Color.Red, SymbolType.None);
                     Pane.AddCurve("Плотность", P2, Color.Blue, SymbolType.None);
 
-                    textBox3.Text = Convert.ToString(1/L);
-                    textBox4.Text = Convert.ToString(1/L/L);
+                    txbxMo.Text = Convert.ToString(1/L);
+                    txbxDisp.Text = Convert.ToString(1/L/L);
                 }
                 catch (Exception)
                 {
@@ -123,32 +123,32 @@ namespace DistributionPlotter
             }
 
             // Обновить график
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
+            zedGraph.AxisChange();
+            zedGraph.Invalidate();
         }
 
        // Выбор распределения
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (rbtnUni.Checked)
             {
                 label2.Text = "A";
                 label3.Text = "B";
 
                 label3.Visible = true;
-                textBox2.Enabled = true;
+                txbxIn2.Enabled = true;
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked)
+            if (rbtnExp.Checked)
             {
                 label2.Text = "lambda";
 
                 label3.Visible = false;
-                textBox2.Enabled = false;
+                txbxIn2.Enabled = false;
             }
         }
     }
