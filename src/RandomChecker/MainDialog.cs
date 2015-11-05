@@ -29,17 +29,24 @@ namespace RandomChecker
             userSeq.SetLength(rowCount);
             for (int i = 0; i<rowCount; i++)
             {
-                try
-                {
-                    userSeq[i] = Convert.ToInt32(dgvUserSeq[0, i].Value);
-                }
-                catch (FormatException)
-                {
-                    lUserSeq.Text = "Error: row "+(i+1)+"!";
+                if (!ParseUserSeqCell(i))
                     return;
-                }
             }
             PerformTest(lUserSeq, userSeq);
+        }
+
+        private bool ParseUserSeqCell(int index)
+        {
+            try
+            {
+                userSeq[index] = Convert.ToInt32(dgvUserSeq[0, index].Value);
+                return true;
+            }
+            catch (FormatException)
+            {
+                lUserSeq.Text = "Error: row "+(index+1)+"!";
+                return false;
+            }
         }
 
         public MainDialog()
@@ -103,6 +110,8 @@ namespace RandomChecker
         {
             int keepBits = (int)numBitLength.Value;
             userSeq.EnsureLength(e.RowIndex+1);
+            if (!ParseUserSeqCell(e.RowIndex))
+                return;
             VerifyBitLength(e.RowIndex, keepBits);
             CalculateGrid();
         }
