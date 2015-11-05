@@ -9,7 +9,7 @@ namespace RandomChecker
     internal class RandomSequence
     {
         public IList<int> Data { get { return data; } }
-        public byte SignificantBits { get; private set; }
+        public byte SignificantBits { get; set; }
         private readonly List<int> data;
 
         public int this[int i]

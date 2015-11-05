@@ -12,7 +12,7 @@ namespace RandomChecker
         private RandomSequence sdFile, ddFile, tdFile;
         private RandomSequence userSeq = RandomSequence.CreateEmpty(2);
         private readonly IRandomSequenceTest rndTest = new ApproximateEntropyTest();
-        private decimal prevBitLength;
+        private byte prevBitLength;
         
         private void CalculateGrid()
         {
@@ -50,20 +50,21 @@ namespace RandomChecker
         public MainDialog()
         {
             InitializeComponent();
-            prevBitLength = numBitLength.Value;
+            prevBitLength = Convert.ToByte(numBitLength.Value);
         }
 
         private void numBitLength_ValueChanged(object sender, EventArgs e)
         {
-            if (numBitLength.Value>=prevBitLength)
+            var currentValue = Convert.ToByte(numBitLength.Value);
+            userSeq.SignificantBits = currentValue;
+            if (currentValue>=prevBitLength)
             {
-                prevBitLength = numBitLength.Value;
+                prevBitLength = currentValue;
                 return;
             }
-            int keepBits = (int)numBitLength.Value;
             int rowCount = dgvUserSeq.RowCount-1;
             for (int i = 0; i<rowCount; i++)
-                VerifyBitLength(i, keepBits);
+                VerifyBitLength(i, currentValue);
         }
 
         private void VerifyBitLength(int index, int keepBits)
