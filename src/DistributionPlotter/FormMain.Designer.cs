@@ -137,6 +137,11 @@
             // numIn2
             // 
             this.numIn2.DecimalPlaces = 3;
+            this.numIn2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numIn2.Location = new System.Drawing.Point(73, 57);
             this.numIn2.Maximum = new decimal(new int[] {
             1000,
@@ -155,6 +160,11 @@
             // numIn1
             // 
             this.numIn1.DecimalPlaces = 3;
+            this.numIn1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numIn1.Location = new System.Drawing.Point(73, 31);
             this.numIn1.Maximum = new decimal(new int[] {
             1000,

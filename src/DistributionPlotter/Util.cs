@@ -48,6 +48,7 @@ namespace DistributionPlotter
             P[1] = new PointPairList(X, y);
             return P;
         }
+
         public static PointPairList[] PlotExp(double L, int Points)
         {
             var d = new Distribution();

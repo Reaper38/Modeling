@@ -58,7 +58,7 @@ namespace DistributionPlotter
             }
             
             Pane.AddCurve("Distribution", p[0], Color.Red, SymbolType.None);
-            Pane.AddCurve("Плотность", p[1], Color.Blue, SymbolType.None);
+            Pane.AddCurve("Density", p[1], Color.Blue, SymbolType.None);
             // Обновить график
             zedGraph.AxisChange();
             zedGraph.Invalidate();
