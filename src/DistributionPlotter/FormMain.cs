@@ -58,8 +58,8 @@ namespace DistributionPlotter
                 try
                 {
                     var d = new Distribution();
-                    double A = Convert.ToDouble(txbxIn1.Text);
-                    double B = Convert.ToDouble(txbxIn2.Text);
+                    double A = (double)numIn1.Value;
+                    double B = (double)numIn2.Value;
                     if (A > B)
                     {
                         A += B;
@@ -92,7 +92,7 @@ namespace DistributionPlotter
                 try
                 {
                     var d = new Distribution();
-                    double L = Convert.ToDouble(txbxIn1.Text);
+                    double L = (double) numIn1.Value;
                     if (L <= 0)
                         throw new Exception("Invalid lambda input");
 
@@ -127,11 +127,11 @@ namespace DistributionPlotter
         {
             if (rbtnUni.Checked)
             {
-                label2.Text = "A";
-                label3.Text = "B";
+                label2.Text = "A:";
+                label3.Text = "B:";
 
                 label3.Visible = true;
-                txbxIn2.Enabled = true;
+                numIn2.Enabled = true;
             }
         }
 
@@ -139,10 +139,10 @@ namespace DistributionPlotter
         {
             if (rbtnExp.Checked)
             {
-                label2.Text = "lambda";
+                label2.Text = "Lambda:";
 
                 label3.Visible = false;
-                txbxIn2.Enabled = false;
+                numIn2.Enabled = false;
             }
         }
     }
