@@ -5,9 +5,7 @@ namespace RandomChecker
 {
     public partial class MainDialog : Form
     {
-        private const int ACount = 1000; // Array size
-        private const int NCount = 15; // Shown number of arrays
-        private const int Lim = 100; // Sequence limit
+        private const int CustomRandSeqLength = 1000;
         // Machine-randomized numbers
         private RandomSequence sdRand, ddRand, tdRand;
         // Numbers from textfile
@@ -79,17 +77,16 @@ namespace RandomChecker
         private void MainDialog_Shown(object sender, EventArgs e)
         {
             Random rand = new Random();
-            sdRand = RandomSequence.Generate(ACount, 1, sb => rand.Next(0, 2));
-            ddRand = RandomSequence.Generate(ACount, 2, sb => rand.Next(0, 4));
-            tdRand = RandomSequence.Generate(ACount, 3, sb => rand.Next(0, 8));
+            sdRand = RandomSequence.Generate(CustomRandSeqLength, 1, sb => rand.Next(0, 2));
+            ddRand = RandomSequence.Generate(CustomRandSeqLength, 2, sb => rand.Next(0, 4));
+            tdRand = RandomSequence.Generate(CustomRandSeqLength, 3, sb => rand.Next(0, 8));
             sdFile = RandomSequence.Load("single_digits.txt", 1);
             ddFile = RandomSequence.Load("double_digits.txt", 2);
             tdFile = RandomSequence.Load("triple_digits.txt", 3);
-            for (int i = 0; i<NCount; i++)
-            {
+            for (int i = 0; i<sdRand.Data.Count; i++)
                 dgvAlgSeq.Rows.Add(sdRand[i], ddRand[i], tdRand[i]);
+            for (int i = 0; i<sdFile.Data.Count; i++)
                 dgvTabSeq.Rows.Add(sdFile[i], ddFile[i], tdFile[i]);
-            }
             PerformTest(lAlgSeq1, sdRand);
             PerformTest(lAlgSeq2, ddRand);
             PerformTest(lAlgSeq3, tdRand);
@@ -101,7 +98,7 @@ namespace RandomChecker
 
         void PerformTest(Label l, RandomSequence src)
         {
-            var result = rndTest.Test(src.Data, Lim, src.SignificantBits)[0];
+            var result = rndTest.Test(src.Data, int.MaxValue, src.SignificantBits)[0];
             string format = result<0.0001 ? "E" : "0.0000";
             l.Text = string.Format("PRB = {0}", result.ToString(format));
         }
