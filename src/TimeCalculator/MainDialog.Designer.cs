@@ -42,10 +42,10 @@
             // 
             // btnCalc
             // 
-            this.btnCalc.Location = new System.Drawing.Point(365, 307);
+            this.btnCalc.Location = new System.Drawing.Point(269, 283);
             this.btnCalc.Margin = new System.Windows.Forms.Padding(2);
             this.btnCalc.Name = "btnCalc";
-            this.btnCalc.Size = new System.Drawing.Size(94, 41);
+            this.btnCalc.Size = new System.Drawing.Size(80, 24);
             this.btnCalc.TabIndex = 0;
             this.btnCalc.Text = "Вычислить";
             this.btnCalc.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             this.dgvCrossTable.AllowUserToResizeRows = false;
             this.dgvCrossTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCrossTable.ColumnHeadersVisible = false;
-            this.dgvCrossTable.Location = new System.Drawing.Point(9, 37);
+            this.dgvCrossTable.Location = new System.Drawing.Point(11, 24);
             this.dgvCrossTable.Margin = new System.Windows.Forms.Padding(2);
             this.dgvCrossTable.Name = "dgvCrossTable";
             this.dgvCrossTable.RowHeadersVisible = false;
@@ -76,7 +76,7 @@
             this.dgvResult.AllowUserToResizeRows = false;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResult.ColumnHeadersVisible = false;
-            this.dgvResult.Location = new System.Drawing.Point(365, 37);
+            this.dgvResult.Location = new System.Drawing.Point(353, 24);
             this.dgvResult.Margin = new System.Windows.Forms.Padding(2);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.ReadOnly = true;
@@ -87,10 +87,10 @@
             // 
             // btnShrink
             // 
-            this.btnShrink.Location = new System.Drawing.Point(9, 307);
+            this.btnShrink.Location = new System.Drawing.Point(10, 283);
             this.btnShrink.Margin = new System.Windows.Forms.Padding(2);
             this.btnShrink.Name = "btnShrink";
-            this.btnShrink.Size = new System.Drawing.Size(56, 41);
+            this.btnShrink.Size = new System.Drawing.Size(24, 24);
             this.btnShrink.TabIndex = 3;
             this.btnShrink.Text = "-";
             this.btnShrink.UseVisualStyleBackColor = true;
@@ -98,10 +98,10 @@
             // 
             // btnExpand
             // 
-            this.btnExpand.Location = new System.Drawing.Point(86, 307);
+            this.btnExpand.Location = new System.Drawing.Point(38, 283);
             this.btnExpand.Margin = new System.Windows.Forms.Padding(2);
             this.btnExpand.Name = "btnExpand";
-            this.btnExpand.Size = new System.Drawing.Size(56, 41);
+            this.btnExpand.Size = new System.Drawing.Size(24, 24);
             this.btnExpand.TabIndex = 4;
             this.btnExpand.Text = "+";
             this.btnExpand.UseVisualStyleBackColor = true;
@@ -109,10 +109,10 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(253, 307);
+            this.btnReset.Location = new System.Drawing.Point(185, 283);
             this.btnReset.Margin = new System.Windows.Forms.Padding(2);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(94, 41);
+            this.btnReset.Size = new System.Drawing.Size(80, 24);
             this.btnReset.TabIndex = 5;
             this.btnReset.Text = "Очистить";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             // lCrossTable
             // 
             this.lCrossTable.AutoSize = true;
-            this.lCrossTable.Location = new System.Drawing.Point(10, 19);
+            this.lCrossTable.Location = new System.Drawing.Point(8, 9);
             this.lCrossTable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lCrossTable.Name = "lCrossTable";
             this.lCrossTable.Size = new System.Drawing.Size(107, 13);
@@ -131,7 +131,7 @@
             // lResult
             // 
             this.lResult.AutoSize = true;
-            this.lResult.Location = new System.Drawing.Point(365, 19);
+            this.lResult.Location = new System.Drawing.Point(350, 9);
             this.lResult.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lResult.Name = "lResult";
             this.lResult.Size = new System.Drawing.Size(59, 13);
@@ -142,7 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 358);
+            this.ClientSize = new System.Drawing.Size(458, 317);
             this.Controls.Add(this.lResult);
             this.Controls.Add(this.lCrossTable);
             this.Controls.Add(this.btnReset);
