@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace TimeCalculator
 {
-    public partial class Form1 : Form
+    public partial class MainDialog : Form
     {
         private MatrixSolver solver;
         private int gridSize;
@@ -11,30 +11,30 @@ namespace TimeCalculator
         // Установка таблицы определённого размера
         private void SetGrid()
         {
-            dataGridView1.ColumnCount = gridSize;
-            dataGridView1.RowCount = gridSize;
+            dgvCrossTable.ColumnCount = gridSize;
+            dgvCrossTable.RowCount = gridSize;
 
             for (int i = 0; i<gridSize; i++)
             {
-                dataGridView1.Columns[i].Width = 55;
+                dgvCrossTable.Columns[i].Width = 55;
                 for (int j = 0; j<gridSize; j++)
                 {
-                    if (dataGridView1[i, j].Value==null)
-                        dataGridView1[i, j].Value = "0";
+                    if (dgvCrossTable[i, j].Value==null)
+                        dgvCrossTable[i, j].Value = "0";
                 }
             }
         }
 
-        public Form1()
+        public MainDialog()
         {
             InitializeComponent();
             gridSize = 4;
             SetGrid();
-            dataGridView2.ColumnCount = 1;
-            dataGridView2.Columns[0].Width = 80;
+            dgvResult.ColumnCount = 1;
+            dgvResult.Columns[0].Width = 80;
         }
         
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCalc_Click(object sender, EventArgs e)
         {
             double[,] a = new double[gridSize, gridSize];
             double[] b = new double[gridSize];
@@ -47,11 +47,11 @@ namespace TimeCalculator
                 {
                     for (int j = 0; j<gridSize; j++)
                     {
-                        a[i, j] = -Convert.ToDouble(dataGridView1[i, j].Value);
+                        a[i, j] = -Convert.ToDouble(dgvCrossTable[i, j].Value);
                         if (j==i)
                         {
                             for (int k = 0; k<gridSize; k++)
-                                a[i, j] += Convert.ToDouble(dataGridView1[k, i].Value);
+                                a[i, j] += Convert.ToDouble(dgvCrossTable[k, i].Value);
                         }
                     }
                 }
@@ -65,18 +65,17 @@ namespace TimeCalculator
                 return;
             }
             solver = new MatrixSolver(a, b);
-            dataGridView2.RowCount = gridSize;
+            dgvResult.RowCount = gridSize;
             for (int i = 0; i<gridSize; i++)
-                dataGridView2[0, i].Value = "";
+                dgvResult[0, i].Value = "";
             if (solver.Calculate())
             {
                 for (int i = 0; i<gridSize; i++)
-                    dataGridView2[0, i].Value =  String.Format("{0:0.000000}", solver.X(i));
+                    dgvResult[0, i].Value =  String.Format("{0:0.000000}", solver.X(i));
             }
         }
-
-        // Увеличение размера матрицы
-        private void button3_Click(object sender, EventArgs e)
+        
+        private void btnExpand_Click(object sender, EventArgs e)
         {
             if (gridSize==15)
             {
@@ -87,9 +86,8 @@ namespace TimeCalculator
             gridSize++;
             SetGrid();
         }
-
-        // Уменьшение размера матрицы
-        private void button2_Click(object sender, EventArgs e)
+        
+        private void btnShrink_Click(object sender, EventArgs e)
         {
             if (gridSize==2)
             {
@@ -101,19 +99,19 @@ namespace TimeCalculator
             SetGrid();
         }
         
-        private void button4_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
             for (int i = 0; i<gridSize; i++)
             {
                 for (int j = 0; j<gridSize; j++)
-                    dataGridView1[i, j].Value = "0";
+                    dgvCrossTable[i, j].Value = "0";
             }
         }
         
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void dgvCrossTable_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex==e.RowIndex)
-                dataGridView1[e.ColumnIndex, e.RowIndex].Value = "0";
+                dgvCrossTable[e.ColumnIndex, e.RowIndex].Value = "0";
         }
     }
 }
