@@ -47,7 +47,7 @@
             this.btnCalc.Name = "btnCalc";
             this.btnCalc.Size = new System.Drawing.Size(80, 24);
             this.btnCalc.TabIndex = 0;
-            this.btnCalc.Text = "Вычислить";
+            this.btnCalc.Text = "Calculate";
             this.btnCalc.UseVisualStyleBackColor = true;
             this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
@@ -114,7 +114,7 @@
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(80, 24);
             this.btnReset.TabIndex = 5;
-            this.btnReset.Text = "Очистить";
+            this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -124,9 +124,9 @@
             this.lCrossTable.Location = new System.Drawing.Point(8, 9);
             this.lCrossTable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lCrossTable.Name = "lCrossTable";
-            this.lCrossTable.Size = new System.Drawing.Size(107, 13);
+            this.lCrossTable.Size = new System.Drawing.Size(59, 13);
             this.lCrossTable.TabIndex = 6;
-            this.lCrossTable.Text = "Матрица переходов";
+            this.lCrossTable.Text = "Cross table";
             // 
             // lResult
             // 
@@ -134,9 +134,9 @@
             this.lResult.Location = new System.Drawing.Point(350, 9);
             this.lResult.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lResult.Name = "lResult";
-            this.lResult.Size = new System.Drawing.Size(59, 13);
+            this.lResult.Size = new System.Drawing.Size(37, 13);
             this.lResult.TabIndex = 7;
-            this.lResult.Text = "Результат";
+            this.lResult.Text = "Result";
             // 
             // MainDialog
             // 
@@ -153,7 +153,7 @@
             this.Controls.Add(this.btnCalc);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainDialog";
-            this.Text = "Решение системы состояний";
+            this.Text = "State system solver";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCrossTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             this.ResumeLayout(false);
