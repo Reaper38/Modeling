@@ -1,98 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TimeCalculator
+﻿namespace TimeCalculator
 {
     class MatrixSolver
     {
-        // Массив множителей
-        private double[,] MA;
-
-        // Массив сумм
-        private double[] MB;
-
-        // Массив результатов
-        private double[] MX;
-
-        // Получить определённый результат
-        public double X(int I)
+        private double[,] mul;
+        private double[] sum;
+        private double[] result;
+        
+        public double X(int i)
         {
-            if (I >= 0 && I < MB.Count())
-                return MX[I];
-            else
-                return 0;
+            if (0<=i && i<sum.Length)
+                return result[i];
+            return 0;
+        }
+
+        private void Swap(ref double a, ref double b)
+        {
+            double tmp = a;
+            a = b;
+            b = tmp;
         }
 
         // Приведение к треугольному виду
         public bool Calculate()
         {
-            int Size = MB.Length;
-
-            int Max;
-            double Buf;
-
-            for (int I = 0; I < Size - 1; ++I)
+            int size = sum.Length;
+            for (int i = 0; i<size-1; ++i)
             {
-                Max = I;
-
-                for (int J = I; J < Size; J++)
-                    if ((MA[J, I] > MA[Max, I]) && (MA[J, I] != 0))
-                        Max = J;
-
-                if (Max != I)
+                int max = i;
+                for (int j = i; j<size; j++)
                 {
-                    for (int J = 0; J < Size; J++)
-                    {
-                        Buf = MA[Max, J];
-                        MA[Max, J] = MA[I, J];
-                        MA[I, J] = Buf;
-                    }
-
-                    Buf = MB[Max];
-                    MB[Max] = MB[I];
-                    MB[I] = Buf;
+                    if (mul[j, i]>mul[max, i] && mul[j, i]!=0)
+                        max = j;
                 }
-
-                for (int J = I + 1; J < Size; ++J)
+                if (max!=i)
                 {
-                    if (MA[I, I] == 0)
+                    for (int j = 0; j<size; j++)
+                        Swap(ref mul[max, j], ref mul[i, j]);
+                    Swap(ref sum[max], ref sum[i]);
+                }
+                for (int j = i+1; j<size; j++)
+                {
+                    if (mul[i, i]==0)
                         return false;
-
-                    Buf = MA[J, I] / MA[I, I];
-
-                    for (int K = I; K < Size; ++K)
-                        MA[J, K] -= MA[I, K] * Buf;
-
-                    MB[J] -= MB[I] * Buf;
+                    double tmp = mul[j, i]/mul[i, i];
+                    for (int k = i; k<size; k++)
+                        mul[j, k] -= mul[i, k]*tmp;
+                    sum[j] -= sum[i]*tmp;
                 }
             }
-
-            // Получение массива результатов из треугольной матрицы
-            for (int I = Size - 1; I > -1; --I)
+            for (int i = size-1; i>-1; i--)
             {
-                for (int J = I + 1; J < Size; ++J)
-                    MB[I] -= MX[J] * MA[I, J];
-
-                if (MA[I, I] == 0)
+                for (int j = i+1; j<size; j++)
+                    sum[i] -= result[j]*mul[i, j];
+                if (mul[i, i]==0)
                     return false;
-
-                MX[I] = MB[I] / MA[I, I];
+                result[i] = sum[i]/mul[i, i];
             }
-
             return true;
         }
-
-        // Конструктор
-        public MatrixSolver(double[,] A, double[] B)
+        
+        public MatrixSolver(double[,] a, double[] b)
 		{
-            int Size = B.Count();
-
-            MA = (double[,])A.Clone();
-            MB = (double[])B.Clone();
-            MX = new double[Size];
+            mul = (double[,])a.Clone();
+            sum = (double[])b.Clone();
+            result = new double[b.Length];
 		}
     }
 }
